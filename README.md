@@ -14,8 +14,7 @@ Lignes 105 et 106 :
 
 dans app.js : 
 Ligne 63 : 
-  		<form action="https://api.particle.io/v1/devices/your-device-id/led?access_token=your-token-access" method="POST">
-
+  		https://api.particle.io/v1/devices/your-device-id/led?access_token=your-token-access
 
 
 
