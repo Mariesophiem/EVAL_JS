@@ -24,6 +24,7 @@
     "mongoose": "^4.12.4",
     "nodemon": "^1.12.1",
     "particle-api-js": "^7.0.0-rc.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "twitter": "^1.7.1"
   }
 }

@@ -5,14 +5,45 @@
 	<title>	EVAL_JS</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
 </head>
 <body>
 	
+<h1>INDEX.HTML</h1>
+
+<body>
+  <center>
+  <ul id="monsocket"></ul>
+  <br>
+  <br>
+  <br>
 
 
 
+<ul id="liste"></ul>
+
+
+  <form action="https://api.particle.io/v1/devices/4e002d000751353530373132/led?access_token=2477f819122a24337b703316ad0356b0b5ddeafc" method="POST">
+    Tell your device what to do!<br>
+    <br>
+    <input type="radio" name="args" value="on">Turn the LED on.
+    <br>
+    <input type="radio" name="args" value="off">Turn the LED off.
+    <br>
+    <br>
+    <input type="submit" value="Do it!">
+    <br>
+    <br>
+    <br>
+    <br>
+    <button><a href="/event-stream.html">Events stream</a></button>
+  </form>
+  </center>
 
 	<script type="text/javascript">
+		var ul = document.getElementById("liste");
+		var li = document.createElement('li');
+		
 		var socket = io.connect('http://localhost:3000');
 		socket.on("monsocket",function(socket){
 		console.log(socket);
