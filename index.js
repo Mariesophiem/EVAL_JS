@@ -5,13 +5,14 @@ var mongoose = require('mongoose');
 var Devices = require('./models/devices.js');
 var EventsObj = require('./models/eventsObj.js');
 var resistorRead = require('./models/resistorRead.js');
-var Users = require('./models/users.js');
-var SrcListe = require('./data/liste.js');
+
 
 var app = express();
 var server = require('http').createServer(app);  
 var io = require('socket.io')(server);
 var Twitter = require('twitter');
+var User = require('./models/users.js');
+var srcListe = require('./data/liste.js');
 
 
 var particle = new Particle();
@@ -40,26 +41,7 @@ promise.then(
         console.log('MONGO ERROR');
         console.log(err);
     }
-//     .then(function(db) {
 
-//     console.log('db.connected');
-
-//     srcListe.forEach(function(userSrc){
-//         console.log(userSrc);
-
-//         var userToSave = new User(userSrc);
-
-//         userToSave.save(function(err, success){
-//             if(err){
-//                 return console.log(err);
-//             }
-//             else{
-//                 console.log(success);
-//             }
-//         });
-//     })
-
-// })
 
 );
 
@@ -102,7 +84,22 @@ app.get('/event-stream.html', function(req, res) {
 app.use('/js', express.static('./client/static/js'));
 app.use('/css', express.static('./client/static/css'));
 
+    srcListe.forEach(function(userSrc){
+        console.log(userSrc);
 
+        var userToSave = new User(userSrc);
+
+        userToSave.save(function(err, success){
+            if(err){
+                return console.log(err);
+                console.log(BLIBLI);
+            }
+            else{
+                console.log(success);
+                console.log('BLABLA');
+            }
+        });
+    });
 
 particle.login({
     username: 'mayormaries@gmail.com',

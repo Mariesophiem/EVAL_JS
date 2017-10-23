@@ -4,10 +4,10 @@ var userSchema = mongoose.Schema({
     "nom": String,
     "prenom": String,
     "mail": String,
-    "createdAt" : Date
+    "createdAt" : Date,
 });
 
 // je crée un model et j'attache le schema ci dessus
-var Users = mongoose.model('users', userSchema);
+var User = mongoose.model('user', userSchema);
 
-module.exports = Users;
+module.exports = User;

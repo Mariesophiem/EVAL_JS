@@ -4,11 +4,10 @@ const srcListe = [
    "prenom": "Marie-Sophie",
    "contact_mail": "mayormaries@gmail.com"
  },
-
  {
-   "nom": "WIDLOECHER",
-   "prenom": "Amélie",
-   "contact_mail": "maildamelie@gmail.com"
+   "nom": "TRUC",
+   "prenom": "Muche",
+   "contact_mail": "truc@muche.com"
  }
 ];
 
