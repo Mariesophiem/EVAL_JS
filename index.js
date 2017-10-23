@@ -11,6 +11,7 @@ var SrcListe = require('./data/liste.js');
 var app = express();
 var server = require('http').createServer(app);  
 var io = require('socket.io')(server);
+var Twitter = require('twitter');
 
 
 var particle = new Particle();
@@ -39,6 +40,26 @@ promise.then(
         console.log('MONGO ERROR');
         console.log(err);
     }
+//     .then(function(db) {
+
+//     console.log('db.connected');
+
+//     srcListe.forEach(function(userSrc){
+//         console.log(userSrc);
+
+//         var userToSave = new User(userSrc);
+
+//         userToSave.save(function(err, success){
+//             if(err){
+//                 return console.log(err);
+//             }
+//             else{
+//                 console.log(success);
+//             }
+//         });
+//     })
+
+// })
 
 );
 
@@ -77,8 +98,11 @@ app.get('/event-stream.html', function(req, res) {
 
 
 // configuration des chemins statics
-app.use('/static', express.static('client/static'));
-app.use('/css', express.static('./client/css'));
+// app.use('/static', express.static('client/static'));
+app.use('/js', express.static('./client/static/js'));
+app.use('/css', express.static('./client/static/css'));
+
+
 
 particle.login({
     username: 'mayormaries@gmail.com',
@@ -87,7 +111,7 @@ particle.login({
     function(data) {
         token = data.body.access_token;
         console.log(token);
-        console.log('Hell yeah !');
+        console.log('waip waip waip!');
         var devicesPr = particle.listDevices({
             auth: token
         });
@@ -175,5 +199,108 @@ app.get('/api/liste/:id', function(req, res) {
         }
     });
 
+
+});
+
+
+// gère les requetes post
+app.post('/quotes', function(req, res) {
+    console.log(req.body);
+    console.log("my name is " + req.body.nom);
+    var newUser = {
+        nom: req.body.nom,
+        prenom: req.body.prenom
+    };
+    res.send(200);
+
+});
+// gère les requetes post
+app.post('/new', function(req, res) {
+    // console.log(req);
+    console.log(req.body);
+    console.log("my name is " + req.body.nom);
+    // console.log("my name is " + req.body.nom);
+    // var newUser = {
+    //     nom: req.body.nom,
+    //     prenom: req.body.prenom
+    // };
+    var userToSave = new User(req.body);
+
+    userToSave.save(function(err, success){
+            if(err){
+                return console.log(err);
+            }
+            else{
+                console.log(success);
+                res.send(success);
+
+            }
+        });
+    
+});
+// gère la suppression
+app.post('/api/delete', function(req, res) {
+    console.log(req.body);
+    User.findByIdAndRemove(req.body.id,function(err, response){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(response);
+            console.log("deleted");
+            res.send(200);
+
+        }
+    });
+    // console.log("my name is " + req.body.nom);
+    // var newUser = {
+    //     nom: req.body.nom,
+    //     prenom: req.body.prenom
+    // };
+
+    
+});
+
+// exemple de rendu html / jade
+app.put('/api/edit/:id', function(req, res) {
+    console.log(req.params);
+    console.log(req.body);
+    console.log(req.params.id);
+    // solution 1 
+
+    // Eleve.update({
+    //     "_id": req.params.id
+    // },req.body,function(err, response){
+    //     if(err){
+    //         console.log(err);
+    //     }
+    //     if(response){
+    //         console.log(response);
+    //         res.send(200);
+    //     }
+    // });
+
+    User.findByIdAndUpdate(req.params.id,req.body, { new: true }, function (err, updatedUser) {
+      if (err) return handleError(err);
+      console.log(updatedUser);
+      res.status(200).send(updatedUser);
+    });
+
+    // Eleve.findOne({
+    //     "_id": req.params.id
+    // }, function(err, monobject) {
+    //     if (err) {
+    //         console.log(err);
+    //         return res.send(err);
+    //     } else {
+    //         return res.render('profil', {
+    //             title: 'Hey',
+    //             nom: monobject.nom,
+    //             prenom: monobject.prenom
+    //         });
+
+    //     }
+    // });
+    // res.send(200);
 
 });

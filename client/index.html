@@ -6,6 +6,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
 	
@@ -13,22 +16,54 @@
 
 <body>
   <center>
-  <ul id="monsocket"></ul>
+
   <br>
   <br>
   <br>
 
+	<div class="container">
+		
+		<h1>LISTE </h1>
+		<ul id="monsocket"></ul>
+		<ul id="liste"></ul>
 
 
-<ul id="liste"></ul>
 
+		<a id="addNew" class="btn btn-primary pull-right">ajouter nouvel user</a>
+		<div class="row">
+			<div id="wrap" class="col-sm-8">	
+			</div>
+			<div id="formAdd" class="col-sm-4">
+				<div id="myForm" class="display">
+					<form id="newUser" >
+						<div class="form-group">
+							<input type="text" name="nom" placeholder="nom" class="form-control" >
+						</div>
+						<div class="form-group">
+							<input type="text" name="prenom" placeholder="prenom" class="form-control" >
+						</div>
+						<div class="form-group">
+							<input type="text" name="mail" placeholder="mail" class="form-control" >
+						</div>
+					</form>
+					<button type="submit" value="Submit" onclick="return submitForm()">valider</button>
+				</div>
+			</div>
+		</div>
+	
+		<!-- <form action="/quotes" method="POST">
+			<input type="text" placeholder="nom" name="nom">
+			<input type="text" placeholder="prenom" name="prenom">
+			<button type="submit">Submit</button>
+		</form> -->
+	
 
   <form action="https://api.particle.io/v1/devices/4e002d000751353530373132/led?access_token=2477f819122a24337b703316ad0356b0b5ddeafc" method="POST">
-    Tell your device what to do!<br>
+    Tell your device what to do with 2 keywords on twitter!<br>
     <br>
-    <input type="radio" name="args" value="on">Turn the LED on.
+    <input type="radio" name="args" value="on">Turn the LED on --> .
     <br>
-    <input type="radio" name="args" value="off">Turn the LED off.
+    <input type="radio" name="args" value="off">Turn the LED off --> .
     <br>
     <br>
     <input type="submit" value="Do it!">
@@ -39,11 +74,12 @@
     <button><a href="/event-stream.html">Events stream</a></button>
   </form>
   </center>
-
+	<script type="text/javascript" src="./js/app.js"></script>
 	<script type="text/javascript">
+		// ul.appendChild(li);
 		var ul = document.getElementById("liste");
 		var li = document.createElement('li');
-		
+
 		var socket = io.connect('http://localhost:3000');
 		socket.on("monsocket",function(socket){
 		console.log(socket);
