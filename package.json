@@ -1,0 +1,29 @@
+{
+  "name": "eval_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mariesophiem/EVAL_JS.git"
+  },
+  "author": "maries",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mariesophiem/EVAL_JS/issues"
+  },
+  "homepage": "https://github.com/Mariesophiem/EVAL_JS#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chart.js": "^2.7.0",
+    "chartjs": "^0.3.24",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4",
+    "nodemon": "^1.12.1",
+    "particle-api-js": "^7.0.0-rc.1",
+    "socket.io": "^2.0.4"
+  }
+}
